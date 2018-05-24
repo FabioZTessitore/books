@@ -1,0 +1,20 @@
+<% include header.ejs %>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-6">
+      <h4>Aggiungi un libro</h4>
+
+      <form action="/new-book" method="POST">
+        <div class="form-group">
+          <label for="title">Titolo</label>
+          <input type="text" name="title" id="title" class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Salva</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% include footer.ejs %>

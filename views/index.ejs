@@ -1,0 +1,57 @@
+<% include header.ejs %>
+
+<div class="container">
+
+<div class="prenota d-none">
+<form action="/prenota" method="POST">
+<input type="hidden" name="id" id="prenotaId" value="">
+<div class="form-group">
+<label for="nome">Nome</label>
+<input type="text" class="form-control" name="nome" id="nome" value="">
+</div><div class="form-group">
+<label for="cognome">Cognome</label>
+<input type="text" class="form-control" name="cognome" id="cognome" value="">
+</div>
+
+<button type="submit" class="btn btn-primary btn-block">Prenota</button>
+</form>
+</div>
+
+  <% books.forEach( function (book) { %>
+    <div class="card book">
+      <div class="card-body">
+        <h5 class="card-title"><a class="btn-link" href="/books/<%= book._id %>"><%= book.title %></a></h5>
+        <form action="/delete-book" method="POST">
+          <input type="hidden" name="id" class="id" value="<%= book._id %>">
+          <button type="submit" class="btn btn-danger">&times</button>
+        </form>
+
+        <button class="btn btn-success prenota-btn">Prenota</button>
+
+        <% if (book.prestito && (book.prestito.nome || book.prestito.cognome)) { %>
+          <p>Preso in prestito da <%= book.prestito.nome %> <%= book.prestito.cognome %></p>
+        <% } %>
+      </div>
+    </div>
+  <% }); %>
+</div>
+
+
+
+
+
+<% include footer.ejs %>
+
+<script>
+console.log('we we');
+
+$('.book').on('click', '.prenota-btn', function (e) {
+  var cardBody = $(this).closest('.card-body');
+  
+  cardBody.append( $('.prenota') );
+  $('.prenota').removeClass('d-none');
+
+  var id = cardBody.find('.id').val();
+  $('#prenotaId').val(id);
+});
+</script>

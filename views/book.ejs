@@ -1,0 +1,20 @@
+<% include header.ejs %>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-6">
+      <h4>Modifica Libro</h4>
+      <form action="/book-update" method="POST">
+        <input type="hidden" name="id" value="<%= book._id %>">
+        <div class="form-group">
+          <label for="title">Titolo</label>
+          <input type="text" name="title" id="title" class="form-control" value="<%= book.title %>">
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-block">Aggiorna</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<% include footer.ejs %>
